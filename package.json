@@ -1,0 +1,25 @@
+{
+  "name": "melody",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "scripts": {
+    "build": "npm run build -w @melody/shared && npm run build -w @melody/worker && npm run build -w @melody/api && npm run build -w @melody/web",
+    "typecheck": "npm run typecheck -w @melody/shared && npm run typecheck -w @melody/worker && npm run typecheck -w @melody/api && npm run typecheck -w @melody/web",
+    "migrate": "npm run migrate -w @melody/shared",
+    "dev:api": "npm run dev -w @melody/api",
+    "dev:worker": "npm run dev -w @melody/worker",
+    "dev:web": "npm run start -w @melody/web"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/pg": "^8.11.11",
+    "typescript": "^5.8.3"
+  }
+}

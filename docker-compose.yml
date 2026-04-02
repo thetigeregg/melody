@@ -1,0 +1,79 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: melody-db
+    environment:
+      POSTGRES_USER: music
+      POSTGRES_PASSWORD: music
+      POSTGRES_DB: music_ai
+      TZ: Europe/Zurich
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: ./packages/api/Dockerfile
+    container_name: melody-api
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://music:music@db:5432/music_ai}
+      MUSIC_DIR: ${MUSIC_DIR:-/music}
+      API_PORT: ${API_PORT:-4000}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1-mini}
+      TZ: ${TZ:-Europe/Zurich}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      DEFAULT_RECOMMENDATION_EXTERNAL_RATIO: ${DEFAULT_RECOMMENDATION_EXTERNAL_RATIO:-0.7}
+      DEFAULT_RECOMMENDATION_REDISCOVERY_RATIO: ${DEFAULT_RECOMMENDATION_REDISCOVERY_RATIO:-0.3}
+      DEFAULT_NOTIFICATION_TIMEZONE: ${DEFAULT_NOTIFICATION_TIMEZONE:-Europe/Zurich}
+    depends_on:
+      - db
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: ./packages/worker/Dockerfile
+    container_name: melody-worker
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://music:music@db:5432/music_ai}
+      MUSIC_DIR: ${MUSIC_DIR:-/music}
+      LASTFM_API_KEY: ${LASTFM_API_KEY:-}
+      LASTFM_USERNAME: ${LASTFM_USERNAME:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1-mini}
+      TZ: ${TZ:-Europe/Zurich}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      DEFAULT_RECOMMENDATION_EXTERNAL_RATIO: ${DEFAULT_RECOMMENDATION_EXTERNAL_RATIO:-0.7}
+      DEFAULT_RECOMMENDATION_REDISCOVERY_RATIO: ${DEFAULT_RECOMMENDATION_REDISCOVERY_RATIO:-0.3}
+      DEFAULT_NOTIFICATION_TIMEZONE: ${DEFAULT_NOTIFICATION_TIMEZONE:-Europe/Zurich}
+      TAG_SCAN_CONCURRENCY: ${TAG_SCAN_CONCURRENCY:-4}
+      WORKER_POLL_INTERVAL_MS: ${WORKER_POLL_INTERVAL_MS:-30000}
+      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-music-intelligence/1.0 (contact@example.com)}
+    volumes:
+      - /volume2/music:/music:ro
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: ./packages/web/Dockerfile
+    container_name: melody-web
+    environment:
+      API_BASE_URL: http://api:4000
+      TZ: ${TZ:-Europe/Zurich}
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+

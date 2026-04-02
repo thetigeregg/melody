@@ -1,0 +1,50 @@
+:root {
+  --melody-bg: #f2efe7;
+  --melody-surface: rgba(255, 255, 255, 0.82);
+  --melody-ink: #1f2a30;
+  --melody-accent: #0e7c7b;
+  --melody-accent-soft: #d7f0ec;
+  --melody-border: rgba(31, 42, 48, 0.12);
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(14, 124, 123, 0.18), transparent 28%),
+    linear-gradient(180deg, #f8f4ec 0%, var(--melody-bg) 100%);
+  color: var(--melody-ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.shell {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.panel {
+  background: var(--melody-surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--melody-border);
+  border-radius: 20px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 20px 40px rgba(31, 42, 48, 0.08);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.accent {
+  color: var(--melody-accent);
+}
+

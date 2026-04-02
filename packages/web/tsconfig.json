@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist/out-tsc",
+    "rootDir": "src",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "types": []
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  },
+  "files": [
+    "src/main.ts"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ]
+}
+
