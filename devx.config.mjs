@@ -3,7 +3,7 @@ export default {
   branchPrefix: 'feat/',
   baseBranch: 'main',
   worktreeRoot: 'worktrees',
-  packageDirs: ['.', 'packages/*'],
+  packageDirs: ['.', 'packages/api', 'packages/worker', 'packages/web', 'packages/shared'],
   env: {
     exampleFile: '.env.example',
     localFile: '.env',
