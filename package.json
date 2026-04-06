@@ -15,11 +15,22 @@
     "migrate": "npm run migrate -w @melody/shared",
     "dev:api": "npm run dev -w @melody/api",
     "dev:worker": "npm run dev -w @melody/worker",
-    "dev:web": "npm run start -w @melody/web"
+    "dev:web": "npm run start -w @melody/web",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@thetigeregg/commitlint-config": "^0.4.4",
+    "@thetigeregg/dev-cli": "^0.5.0",
+    "@thetigeregg/lint-staged-config": "^0.2.4",
+    "@thetigeregg/ncu-config": "^0.3.4",
+    "@thetigeregg/prettier-config": "^0.3.4",
     "@types/node": "^22.13.10",
     "@types/pg": "^8.11.11",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "npm-check-updates": "^20.0.0",
+    "prettier": "^3.8.1",
     "typescript": "^5.8.3"
   }
 }
