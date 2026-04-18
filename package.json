@@ -6,11 +6,14 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=20.0.0",
+    "node": ">=24.14.0",
     "npm": ">=10.0.0"
   },
   "scripts": {
     "build": "npm run build -w @melody/shared && npm run build -w @melody/worker && npm run build -w @melody/api && npm run build -w @melody/web",
+    "lint": "prettier --check package.json package-lock.json devx.config.mjs lint-staged.config.cjs commitlint.config.cjs .prettierrc.cjs .ncurc.cjs README.md packages/*/package.json",
+    "lint:fix": "prettier --write package.json package-lock.json devx.config.mjs lint-staged.config.cjs commitlint.config.cjs .prettierrc.cjs .ncurc.cjs README.md packages/*/package.json",
+    "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck -w @melody/shared && npm run typecheck -w @melody/worker && npm run typecheck -w @melody/api && npm run typecheck -w @melody/web",
     "migrate": "npm run migrate -w @melody/shared",
     "dev:api": "npm run dev -w @melody/api",
@@ -20,11 +23,11 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
-    "@thetigeregg/commitlint-config": "^0.4.4",
-    "@thetigeregg/dev-cli": "^0.5.0",
-    "@thetigeregg/lint-staged-config": "^0.2.4",
-    "@thetigeregg/ncu-config": "^0.3.4",
-    "@thetigeregg/prettier-config": "^0.3.4",
+    "@thetigeregg/commitlint-config": "^1.0.0",
+    "@thetigeregg/dev-cli": "^4.0.0",
+    "@thetigeregg/lint-staged-config": "^1.0.0",
+    "@thetigeregg/ncu-config": "^2.0.0",
+    "@thetigeregg/prettier-config": "^1.0.0",
     "@types/node": "^22.13.10",
     "@types/pg": "^8.11.11",
     "husky": "^9.1.7",

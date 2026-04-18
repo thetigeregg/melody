@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "ng build",
+    "build": "CI=1 ng build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "start": "ng serve --host 0.0.0.0 --port 4200"
   },
@@ -27,4 +27,3 @@
     "@angular/compiler-cli": "^19.2.0"
   }
 }
-
