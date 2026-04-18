@@ -5,10 +5,9 @@ alwaysApply: true
 ---
 
 Before suggesting any commit:
-1. Run `<test-command>` to execute tests
-2. Run `<format-command>` to verify formatting
+1. Run `npm run lint` to verify formatting (Prettier check)
+2. Run `npm run typecheck`, `npm run build`, and `npm run test`
 3. Do not bypass pre-commit hooks
 4. If any step fails, fix the issue before proceeding
 
-# TODO: Replace <test-command> and <format-command> with
-# this project's actual commands from devx.config.mjs
+These steps match `pr.verifyCommands` in `devx.config.mjs`.
