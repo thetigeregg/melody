@@ -153,6 +153,11 @@ This is useful context when making future changes: prefer improving the current 
 - Failures should be logged and retried on the next schedule rather than alerting aggressively.
 - Tailscale exposure is external to this repository and not managed in Compose.
 
+## Prerequisites
+
+- **Node.js** and **npm** versions must satisfy the root [`package.json`](package.json) `engines` field. The repo pins a local development version in [`.nvmrc`](.nvmrc); with [nvm](https://github.com/nvm-sh/nvm), run `nvm use` (or `nvm install`) from the repository root before `npm install`.
+- **Docker** (optional but typical): API, worker, and web build stages use Node images aligned with that same line; see the `FROM node:…` stages in each package `Dockerfile`.
+
 ## Quick Start
 
 1. Copy `.env.example` to `.env` and fill in secrets.

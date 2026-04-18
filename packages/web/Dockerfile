@@ -1,4 +1,5 @@
-FROM node:22-alpine AS build
+# Node image tracks root .nvmrc (24.14.x)
+FROM node:24.14-alpine AS build
 WORKDIR /app
 
 COPY package.json tsconfig.base.json ./
