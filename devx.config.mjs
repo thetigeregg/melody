@@ -10,11 +10,11 @@ export default {
   },
   pr: {
     baseRef: 'origin/main',
-    summaryOutputFile: '.pr-summary-prompt.md',
-    agentOutputFile: '.pr-agent-prompt.md',
+    prepOutputFile: 'prompts/pr-prep-prompt.md',
+    feedbackOutputFile: 'prompts/pr-feedback-prompt.md',
     excludedDiffPaths: [':(glob,exclude)**/package-lock.json', ':(glob,exclude)**/dist/**'],
     ciWorkflowName: 'CI',
     coverageArtifactName: 'coverage-reports',
-    verifyCommands: ['npm run lint'],
+    verifyCommands: ['npm run lint', 'npm run typecheck', 'npm run build', 'npm run test'],
   },
 };
